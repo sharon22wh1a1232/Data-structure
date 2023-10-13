@@ -5,8 +5,8 @@ struct node
 	int data;
 	struct node*link;
 };
-void insert(struct node*head,int data,int position);
-void traverse(struct node*head);
+void delete(struct node*head,int position);
+void display(struct node*head);
 void main()
 {
 	struct node*head=(struct node*)malloc(sizeof(struct node));
@@ -20,40 +20,42 @@ void main()
 	current->data=4000;
 	current->link=NULL;
 	head->link->link=current;
-	insert(head,5000,3);
-	traverse(head);
+	printf("before deltion\n");
+	display(head);
+	printf("after deletion\n");
+	delete(head,2);
+	display(head);
 
 }
 
-void insert(struct node*head,int data,int position)
+void delete(struct node*head,int position)
 {
-	struct node*temp=NULL;
-	temp=head;
-	struct node*new=(struct node*)malloc(sizeof(struct node));
-
-	new->data=5000;
-	new->link=NULL;
-	while(position!=2)
+	struct node *temp=head;
+	struct node *temp1=NULL;
+	while(position!=1)
 	{
+		temp1=temp;
 		temp=temp->link;
 		position--;
 	}
-	new->link=temp->link;
-	temp->link=new;
+	temp1->link=temp->link;
+	free(temp);
+	temp=NULL;
 }
-void traverse(struct node*head)
+void display(struct node *head)
 {
-	struct node*temp=head;
-	if(head==NULL)
-	{
-		printf("empty");
-	}
+	struct node *temp=head;
 	while(temp!=NULL)
 	{
 		printf("%d->",temp->data);
 		temp=temp->link;
 	}
+	printf("NULL\n");
 }
+
+
+
+
 
 
 
